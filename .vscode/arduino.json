@@ -1,0 +1,6 @@
+{
+    "board": "digistump:avr:digispark-tiny",
+    "programmer": "USBtinyISP",
+    "port": "/dev/tty.Bluetooth-Incoming-Port",
+    "sketch": "grinder_v3.ino"
+}
