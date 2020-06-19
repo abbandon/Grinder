@@ -47,7 +47,7 @@ const DCfont TinyOLED4kfont8x16Digits_ext = {
   (uint8_t *)ssd1306xled_font8x16_digits_ext,
   8, // character width in pixels
   2, // character height in pages (8 pixels)
-  47,60 // ASCII extents
+  0x2F,0x3E // ASCII extents
 };
 
 // for backwards compatibility
