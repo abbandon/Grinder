@@ -4,7 +4,7 @@
 #include <avr/sleep.h>
 
 #include <Tiny4kOLED.h>
-#include "font8x16digits_ext.h"
+#include "font16x32digitsext.h"
 
 
 #define ULONG_MAX (-1UL)
@@ -22,12 +22,12 @@
 #define IN_PUSH_BUTTON 4
 #define OUT_ACTION_TRIGGER 1
 
-const char BLANC_CHAR='\x2F';
-const char SEC_CHAR='\x3A';
-const char POINT_CHAR='\x3B';
-const char ERROR_CHAR='\x3C'; // #
-const char SETUP_CHAR='\x3D'; // @
-const char READY_CHAR='\x3E'; // >
+const char BLANC_CHAR='\x2B';//'\x2F';
+const char SEC_CHAR='\x2F';// s
+const char POINT_CHAR='\x2E';//'\x3B'; // .
+const char ERROR_CHAR='\x2F';//'\x3C'; // #
+const char SETUP_CHAR='\x2F';//'\x3D'; // @
+const char READY_CHAR='\x2F';//'\x3E'; // >
 
 //const char TRI_POINTS_CHAR[] PROGMEM  = {POINT_CHAR,POINT_CHAR,POINT_CHAR,0};
 //const char ERR_CHAR[] PROGMEM  = {SHARP_CHAR,SHARP_CHAR,SHARP_CHAR,0};
@@ -49,8 +49,8 @@ void setup() {
   pinMode(OUT_ACTION_TRIGGER, OUTPUT);
   digitalWrite(OUT_ACTION_TRIGGER, LOW);
   
-  oled.begin(0,0);
-  oled.setFont(FONT8X16DIGITSEXT);
+  oled.begin(128,64,0,0);
+  oled.setFont(FONT16X32DIGITS_EXT);
   
   oled.enableChargePump();
   oled.setRotation(1);
@@ -188,7 +188,7 @@ void _loop_Worker(){
 }
 
 void printTime(char _status){
-  oled.clear();
+  //oled.clear();
   oled.setCursor(0, 0);
   oled.print(_status);
   oled.print((int)_sec);
