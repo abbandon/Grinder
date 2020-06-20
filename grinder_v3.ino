@@ -22,13 +22,13 @@
 #define IN_PUSH_BUTTON 4
 #define OUT_ACTION_TRIGGER 1
 
-const char BLANC_CHAR='\x2B';//'\x2F';
-const char SEC_CHAR='\x2F';// s
-const char POINT_CHAR='\x2E';//'\x3B'; // .
-const char ERROR_CHAR='\x2F';//'\x3C'; // #
-const char SETUP_CHAR='\x2F';//'\x3D'; // @
-const char READY_CHAR='\x2F';//'\x3E'; // >
-
+const char DOWORK_CHAR='\x3F';// working
+const char SEC_CHAR='\x3B';// s
+const char POINT_CHAR='\x2E';// .
+const char ERROR_CHAR='\x3C'; // cross bones
+const char SETUP_CHAR='\x3D';// setup
+const char READY_CHAR='\x3E';// ready arrow
+const char SAVE_CHAR='\x40';// save arrow
 //const char TRI_POINTS_CHAR[] PROGMEM  = {POINT_CHAR,POINT_CHAR,POINT_CHAR,0};
 //const char ERR_CHAR[] PROGMEM  = {SHARP_CHAR,SHARP_CHAR,SHARP_CHAR,0};
 
@@ -49,12 +49,14 @@ void setup() {
   pinMode(OUT_ACTION_TRIGGER, OUTPUT);
   digitalWrite(OUT_ACTION_TRIGGER, LOW);
   
-  oled.begin(128,64,0,0);
+  //oled.begin(128,64,0,0);
+  oled.begin(128, 64, sizeof(tiny4koled_init_128x64br), tiny4koled_init_128x64br);
   oled.setFont(FONT16X32DIGITS_EXT);
   
   oled.enableChargePump();
   oled.setRotation(1);
   oled.enableZoomIn();
+
 
   oled.clear();
 
@@ -143,7 +145,7 @@ void _loop_Settings(){
     unsigned long _t;
     while(digitalRead(IN_PUSH_BUTTON) == HIGH){
       if ((millis() - _pressed) < 5000) continue;
-      if ((millis() - _pressed) < 10000) printTime(SEC_CHAR);
+      if ((millis() - _pressed) < 10000) printTime(SAVE_CHAR);
       else printTime(ERROR_CHAR);
     }
     
@@ -168,7 +170,7 @@ void _loop_Settings(){
 void _loop_Worker(){
 
   digitalWrite(OUT_ACTION_TRIGGER, HIGH);
-  printTime(BLANC_CHAR);
+  printTime(DOWORK_CHAR);
   if (digitalRead(IN_PUSH_BUTTON) == HIGH) {
     digitalWrite(OUT_ACTION_TRIGGER, LOW);
     delay(100);
